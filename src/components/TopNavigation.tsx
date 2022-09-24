@@ -1,6 +1,88 @@
-import TopNavigation from "@cloudscape-design/components/top-navigation";
+import TopNavigation, {
+  TopNavigationProps,
+} from "@cloudscape-design/components/top-navigation";
 
-export default () => {
+export default (props: { isLoggedIn: boolean }) => {
+  const { isLoggedIn } = props;
+  const renderUtility = (isLoggedIn: boolean): TopNavigationProps.Utility => {
+    if (isLoggedIn) {
+      return {
+        type: "menu-dropdown",
+        text: "Customer Name",
+        description: "email@example.com",
+        iconName: "user-profile",
+        items: [
+          { id: "profile", text: "Profile" },
+          { id: "preferences", text: "Preferences" },
+          { id: "security", text: "Security" },
+          {
+            id: "support-group",
+            text: "Support",
+            items: [
+              {
+                id: "documentation",
+                text: "Documentation",
+                href: "#",
+                external: true,
+                externalIconAriaLabel: " (opens in new tab)",
+              },
+              { id: "support", text: "Support" },
+              {
+                id: "feedback",
+                text: "Feedback",
+                href: "#",
+                external: true,
+                externalIconAriaLabel: " (opens in new tab)",
+              },
+            ],
+          },
+          { id: "signout", text: "Sign out" },
+        ],
+      };
+    }
+    return {
+      type: "button",
+      text: "Log In",
+      href: "https://example.com/",
+      iconName: "user-profile",
+      ariaLabel: "Log In button",
+    };
+  };
+  const utilities: TopNavigationProps.Utility[] = [
+    {
+      type: "button",
+      text: "Link",
+      href: "https://example.com/",
+      external: true,
+      externalIconAriaLabel: " (opens in a new tab)",
+    },
+    {
+      type: "button",
+      iconName: "notification",
+      title: "Notifications",
+      ariaLabel: "Notifications (unread)",
+      badge: true,
+      disableUtilityCollapse: false,
+    },
+    {
+      type: "menu-dropdown",
+      iconName: "settings",
+      ariaLabel: "Settings",
+      title: "Settings",
+      items: [
+        {
+          id: "settings-org",
+          text: "Organizational settings",
+        },
+        {
+          id: "settings-project",
+          text: "Project settings",
+        },
+      ],
+    },
+    renderUtility(isLoggedIn),
+  ];
+
   return (
     <TopNavigation
       identity={{
@@ -11,72 +93,7 @@ export default () => {
           alt: "Service",
         },
       }}
-      utilities={[
-        {
-          type: "button",
-          text: "Link",
-          href: "https://example.com/",
-          external: true,
-          externalIconAriaLabel: " (opens in a new tab)",
-        },
-        {
-          type: "button",
-          iconName: "notification",
-          title: "Notifications",
-          ariaLabel: "Notifications (unread)",
-          badge: true,
-          disableUtilityCollapse: false,
-        },
-        {
-          type: "menu-dropdown",
-          iconName: "settings",
-          ariaLabel: "Settings",
-          title: "Settings",
-          items: [
-            {
-              id: "settings-org",
-              text: "Organizational settings",
-            },
-            {
-              id: "settings-project",
-              text: "Project settings",
-            },
-          ],
-        },
-        {
-          type: "menu-dropdown",
-          text: "Customer Name",
-          description: "email@example.com",
-          iconName: "user-profile",
-          items: [
-            { id: "profile", text: "Profile" },
-            { id: "preferences", text: "Preferences" },
-            { id: "security", text: "Security" },
-            {
-              id: "support-group",
-              text: "Support",
-              items: [
-                {
-                  id: "documentation",
-                  text: "Documentation",
-                  href: "#",
-                  external: true,
-                  externalIconAriaLabel: " (opens in new tab)",
-                },
-                { id: "support", text: "Support" },
-                {
-                  id: "feedback",
-                  text: "Feedback",
-                  href: "#",
-                  external: true,
-                  externalIconAriaLabel: " (opens in new tab)",
-                },
-              ],
-            },
-            { id: "signout", text: "Sign out" },
-          ],
-        },
-      ]}
+      utilities={utilities}
       i18nStrings={{
         searchIconAriaLabel: "Search",
         searchDismissIconAriaLabel: "Close search",
