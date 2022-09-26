@@ -1,22 +1,28 @@
 import Button from "@cloudscape-design/components/button";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
+import { Auth } from "aws-amplify";
+import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 
 export default function Login() {
-  const { route, toFederatedSignIn } = useAuthenticator((context) => [
-    context.route,
+  const { authStatus, toFederatedSignIn } = useAuthenticator((context) => [
+    context.authStatus,
   ]);
-  return (
+  return authStatus === "authenticated" ? (
+    <>Already Logged In.</>
+  ) : (
     <>
-      <Button
+      {/* <Button
         onClick={() => {
-          toFederatedSignIn({ provider: "Facebook" });
+          Auth.federatedSignIn({
+            provider: CognitoHostedUIIdentityProvider.Google,
+          });
         }}
       >
         Login to continue
-      </Button>
-      <Authenticator
-        socialProviders={["amazon", "apple", "facebook", "google"]}
-      ></Authenticator>
+      </Button> */}
+      {Auth.federatedSignIn({
+        provider: CognitoHostedUIIdentityProvider.Google,
+      })}
     </>
   );
 }

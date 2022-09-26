@@ -6,6 +6,7 @@ import ProtectedTwo from "./pages/ProtectedTwo";
 import ProtectedThree from "./pages/ProtectedThree";
 import UnprotectedFour from "./pages/UnprotectedFour";
 import Login from "./pages/Login";
+import Signout from "./pages/Signout";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/protectedthree" element={<ProtectedThree />}></Route>
           <Route path="/unprotectedfour" element={<UnprotectedFour />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/signout" element={<Signout />}></Route>
           <Route path="*" element={<>NotFound</>}></Route>
         </Route>
       </Routes>
