@@ -1,11 +1,15 @@
+import { useAuthenticator } from "@aws-amplify/ui-react";
 import TopNavigation, {
   TopNavigationProps,
 } from "@cloudscape-design/components/top-navigation";
+import { useNavigate } from "react-router-dom";
 
-export default (props: { isLoggedIn: boolean }) => {
-  const { isLoggedIn } = props;
-  const renderUtility = (isLoggedIn: boolean): TopNavigationProps.Utility => {
-    if (isLoggedIn) {
+export default () => {
+  const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+  const navigate = useNavigate();
+
+  const renderUtility = (): TopNavigationProps.Utility => {
+    if (authStatus === "authenticated") {
       return {
         type: "menu-dropdown",
         text: "Customer Name",
@@ -43,11 +47,14 @@ export default (props: { isLoggedIn: boolean }) => {
     return {
       type: "button",
       text: "Log In",
-      href: "https://example.com/",
+      onClick: () => {
+        navigate("/login");
+      },
       iconName: "user-profile",
       ariaLabel: "Log In button",
     };
   };
+
   const utilities: TopNavigationProps.Utility[] = [
     {
       type: "button",
@@ -80,7 +87,7 @@ export default (props: { isLoggedIn: boolean }) => {
         },
       ],
     },
-    renderUtility(isLoggedIn),
+    renderUtility(),
   ];
 
   return (

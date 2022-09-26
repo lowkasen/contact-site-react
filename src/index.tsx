@@ -2,16 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "@cloudscape-design/global-styles/index.css";
+import "@aws-amplify/ui-react/styles.css";
 import App from "./App";
+import { Authenticator } from "@aws-amplify/ui-react";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Authenticator.Provider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Authenticator.Provider>
   </React.StrictMode>
 );
 

@@ -5,11 +5,12 @@ import ProtectedOne from "./pages/ProtectedOne";
 import ProtectedTwo from "./pages/ProtectedTwo";
 import ProtectedThree from "./pages/ProtectedThree";
 import UnprotectedFour from "./pages/UnprotectedFour";
+import Login from "./pages/Login";
 
 export default function App() {
   return (
     <>
-      <TopNavigation isLoggedIn={true} />
+      <TopNavigation />
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<>Home</>}></Route>
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/protectedtwo" element={<ProtectedTwo />}></Route>
           <Route path="/protectedthree" element={<ProtectedThree />}></Route>
           <Route path="/unprotectedfour" element={<UnprotectedFour />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="*" element={<>NotFound</>}></Route>
         </Route>
       </Routes>

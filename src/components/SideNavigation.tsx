@@ -7,31 +7,20 @@ export default () => {
   return (
     <SideNavigation
       activeHref={activeHref}
-      header={{ href: "#/", text: "Service name" }}
+      header={{ href: "/", text: "Service name" }}
       onFollow={(event) => {
         if (!event.detail.external) {
-          event.preventDefault();
+          // event.preventDefault();
           setActiveHref(event.detail.href);
         }
       }}
       items={[
-        { type: "link", text: "Page 1", href: "#/page1" },
-        { type: "link", text: "Page 2", href: "#/page2" },
-        { type: "link", text: "Page 3", href: "#/page3" },
-        { type: "link", text: "Page 4", href: "#/page4" },
+        { type: "link", text: "Protected1", href: "/protectedone" },
+        { type: "link", text: "Protected2", href: "/protectedtwo" },
+        { type: "link", text: "Protected3", href: "/protectedthree" },
+        { type: "link", text: "Unprotected4", href: "/unprotectedfour" },
         { type: "divider" },
-        {
-          type: "link",
-          text: "Notifications",
-          href: "#/notifications",
-          info: <Badge color="red">23</Badge>,
-        },
-        {
-          type: "link",
-          text: "Documentation",
-          href: "https://example.com",
-          external: true,
-        },
+        { type: "link", text: "Login", href: "/login" },
       ]}
     />
   );
