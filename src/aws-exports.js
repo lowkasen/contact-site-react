@@ -6,7 +6,6 @@ const awsmobile = {
 
   // AppSync settings
   // aws_appsync_graphqlEndpoint:
-  //   "https://f6htjch35vd7po7npptjrsrm5u.appsync-api.ap-southeast-1.amazonaws.com/graphql",
   // aws_appsync_region: "ap-southeast-1",
   // aws_appsync_authenticationType: "API_KEY",
   // aws_appsync_apiKey: process.env.REACT_APP_APPSYNC_API_KEY,
@@ -17,7 +16,7 @@ const awsmobile = {
   aws_user_pools_web_client_id:
     process.env.REACT_APP_aws_user_pools_web_client_id,
   oauth: {
-    domain: "googleuath.auth.ap-southeast-1.amazoncognito.com",
+    domain: process.env.REACT_APP_oauth_domain,
     scope: ["email", "openid"],
     redirectSignIn: process.env.REACT_APP_redirecturl_signin,
     redirectSignOut: process.env.REACT_APP_redirecturl_signout,
