@@ -1,22 +1,36 @@
-import Button from "@cloudscape-design/components/button";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
+import {
+  Authenticator,
+  useAuthenticator,
+  VisuallyHidden,
+} from "@aws-amplify/ui-react";
+import { Auth } from "aws-amplify";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Login() {
-  const { route, toFederatedSignIn } = useAuthenticator((context) => [
-    context.route,
-  ]);
+  const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+  const location = useLocation();
+  const navigate = useNavigate();
+  let from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (authStatus === "authenticated") {
+      navigate(from, { replace: true });
+    } else if (authStatus === "unauthenticated") {
+      Auth.federatedSignIn({ customProvider: "EmbedOKTA" });
+    }
+  }, [authStatus, navigate, from]);
+
   return (
     <>
-      <Button
-        onClick={() => {
-          toFederatedSignIn({ provider: "Facebook" });
-        }}
-      >
-        Login to continue
-      </Button>
-      <Authenticator
-        socialProviders={["amazon", "apple", "facebook", "google"]}
-      ></Authenticator>
+      {authStatus === "authenticated" ? (
+        <h1>Already logged in.</h1>
+      ) : (
+        <h1>Logging in...</h1>
+      )}
+      <VisuallyHidden>
+        <Authenticator></Authenticator>
+      </VisuallyHidden>
     </>
   );
 }

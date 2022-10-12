@@ -5,6 +5,9 @@ import "@cloudscape-design/global-styles/index.css";
 import "@aws-amplify/ui-react/styles.css";
 import App from "./App";
 import { Authenticator } from "@aws-amplify/ui-react";
+import { Amplify } from "aws-amplify";
+import awsExports from "./aws-exports";
+Amplify.configure(awsExports);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
